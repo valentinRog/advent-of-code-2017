@@ -30,10 +30,11 @@ pub fn solve(input: &str) {
     let mut z = Complex(0, 0);
     let mut d = Complex(1, 0);
     let mut s = std::collections::HashMap::<Complex, i32>::new();
-    s.insert(z, 1); // (1
-    loop {
+    let mut v = 1;
+    s.insert(z, v);
+    while v < n {
         z = z + d;
-        let mut v = 0;
+        v = 0;
         for z2 in [
             Complex(1, 0),
             Complex(1, 1),
@@ -46,13 +47,10 @@ pub fn solve(input: &str) {
         ] {
             v += s.get(&(z2 + z)).unwrap_or(&0);
         }
-        if v > n {
-            println!("{}", v);
-            break;
-        }
         s.insert(z, v);
         if s.get(&(z + d * Complex(0, 1))).is_none() {
             d = Complex(0, 1) * d;
         }
     }
+    println!("{v}");
 }

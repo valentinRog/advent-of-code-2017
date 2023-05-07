@@ -21,17 +21,16 @@ pub fn solve(input: &str) {
     .into_iter()
     .collect::<HashMap<_, _>>();
 
-    let mut r = input
-        .split("\n")
-        .map(|x| (x.split_whitespace().next().unwrap(), 0))
-        .collect::<HashMap<_, _>>();
-
+    let mut r = HashMap::new();
     input
         .split("\n")
         .map(|x| x.split_whitespace().collect::<Vec<_>>())
         .for_each(|x| {
-            if cmp[x[5]](r[x[4]], x[6].parse::<i32>().unwrap()) {
-                r.insert(x[0], op[x[1]](r[x[0]], x[2].parse::<i32>().unwrap()));
+            if cmp[x[5]](*r.get(x[4]).unwrap_or(&0), x[6].parse::<i32>().unwrap()) {
+                r.insert(
+                    x[0],
+                    op[x[1]](*r.get(x[0]).unwrap_or(&0), x[2].parse::<i32>().unwrap()),
+                );
             }
         });
     println!("{}", r.into_values().max().unwrap());

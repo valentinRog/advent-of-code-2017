@@ -9,8 +9,8 @@ pub fn solve(input: &str) {
         .collect::<HashSet<_>>();
     let res = input
         .split("\n")
-        .map(|x| x.split_whitespace().nth(0).unwrap())
-        .find(|x| st.get(x).is_none())
+        .map(|x| x.split_whitespace().next().unwrap())
+        .find(|x| !st.contains(x))
         .unwrap();
     println!("{res}");
 }

@@ -26,7 +26,7 @@ pub fn solve(input: &str) {
         .map(|x| (x.split_whitespace().next().unwrap(), 0))
         .collect::<HashMap<_, _>>();
 
-    let mut res: Option<i32> = None;
+    let mut res = 0;
     input
         .split("\n")
         .map(|x| x.split_whitespace().collect::<Vec<_>>())
@@ -34,11 +34,8 @@ pub fn solve(input: &str) {
             if cmp[x[5]](r[x[4]], x[6].parse::<i32>().unwrap()) {
                 let n = op[x[1]](r[x[0]], x[2].parse::<i32>().unwrap());
                 r.insert(x[0], n);
-                match res {
-                    Some(n2) => res = Some(n2.max(n)),
-                    _ => res = Some(n),
-                };
+                res = res.max(n);
             }
         });
-    println!("{}", res.unwrap());
+    println!("{}", res);
 }

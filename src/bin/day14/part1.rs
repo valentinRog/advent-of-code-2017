@@ -23,12 +23,13 @@ fn hash(input: &str) -> String {
 }
 
 pub fn solve(input: &str) {
+    let mut res = 0;
     for i in 0..128 {
-        let hash = hash(&format!("{input}-{i}"));
-        let hash = hash
-            .chars()
-            .map(|x| i32::from_str_radix(&x.to_string(), 2).unwrap())
-            .map(|x| format!("{:04x}", x))
-            .collect::<String>();
+        res += hash(&format!("{input}-{i}")).chars().fold(0, |acc, x| {
+            acc + i32::from_str_radix(&x.to_string(), 16)
+                .unwrap()
+                .count_ones()
+        });
     }
+    println!("{res}");
 }

@@ -1,3 +1,5 @@
+use std::i32;
+
 fn hash(input: &str) -> String {
     let mut v = (0..256).collect::<Vec<_>>();
     let mut i = 0;
@@ -21,5 +23,12 @@ fn hash(input: &str) -> String {
 }
 
 pub fn solve(input: &str) {
-    
+    for i in 0..128 {
+        let hash = hash(&format!("{input}-{i}"));
+        let hash = hash
+            .chars()
+            .map(|x| i32::from_str_radix(&x.to_string(), 2).unwrap())
+            .map(|x| format!("{:04x}", x))
+            .collect::<String>();
+    }
 }

@@ -1,6 +1,6 @@
 pub fn solve(input: &str) {
     let mut v: Vec<_> = input
-        .split("\n")
+        .lines()
         .map(|x| x.parse::<i32>().unwrap())
         .collect();
     let mut i: i32 = 0;

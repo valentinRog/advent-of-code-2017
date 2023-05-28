@@ -4,14 +4,14 @@ pub fn solve(input: &str) {
     let weights = input
         .replace("(", "")
         .replace(")", "")
-        .split("\n")
+        .lines()
         .map(|x| x.split_whitespace().take(2).collect::<Vec<_>>())
         .map(|x| (String::from(x[0]), x[1].parse::<i32>().unwrap()))
         .collect::<HashMap<_, _>>();
 
     let tree = input
         .replace(",", "")
-        .split("\n")
+        .lines()
         .map(|x| {
             x.split_whitespace()
                 .filter(|x| x.chars().all(|c| c.is_alphabetic()))
@@ -22,13 +22,13 @@ pub fn solve(input: &str) {
 
     let mut name = {
         let st = input
-            .split("\n")
+            .lines()
             .filter(|x| x.contains("->"))
             .map(|x| x.split("->").nth(1).unwrap())
             .flat_map(|x| x.split(",").map(|x| x.trim()))
             .collect::<HashSet<_>>();
         input
-            .split("\n")
+            .lines()
             .map(|x| x.split_whitespace().next().unwrap())
             .find(|x| !st.contains(x))
             .unwrap()

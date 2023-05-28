@@ -1,6 +1,6 @@
 pub fn solve(input: &str) {
     let res = input
-        .split("\n")
+        .lines()
         .map(|x| {
             x.split_whitespace().map(|x| {
                 let mut x = x.chars().collect::<Vec<_>>();

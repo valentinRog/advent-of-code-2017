@@ -24,7 +24,7 @@ pub fn solve(input: &str) {
     let mut r = HashMap::new();
     let mut res = 0;
     input
-        .split("\n")
+        .lines()
         .map(|x| x.split_whitespace().collect::<Vec<_>>())
         .for_each(|x| {
             if cmp[x[5]](*r.get(x[4]).unwrap_or(&0), x[6].parse::<i32>().unwrap()) {

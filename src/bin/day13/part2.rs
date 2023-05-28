@@ -1,6 +1,6 @@
 pub fn solve(input: &str) {
     let data = input
-        .split("\n")
+        .lines()
         .map(|x| x.split(": ").map(|x| x.parse::<i32>().unwrap()))
         .map(|mut x| (x.next().unwrap(), x.next().unwrap()));
     for d in 0.. {

@@ -15,7 +15,7 @@ pub fn solve(input: &str) {
     let connections = input
         .replace("<->", "")
         .replace(",", "")
-        .split("\n")
+        .lines()
         .map(|x| {
             x.split_whitespace()
                 .map(|x| x.parse::<i32>().unwrap())

@@ -1,6 +1,6 @@
 pub fn solve(input: &str) {
     let res = input
-        .split("\n")
+        .lines()
         .map(|x| x.split_whitespace().map(|x| x.parse::<i32>().unwrap()))
         .map(|line| {
             for x in line.clone() {

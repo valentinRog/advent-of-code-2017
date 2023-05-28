@@ -1,3 +1,5 @@
+use std::collections::HashMap;
+
 #[derive(Debug, Clone, Copy)]
 struct Vec3(i32, i32, i32);
 
@@ -9,11 +11,21 @@ impl std::ops::AddAssign for Vec3 {
     }
 }
 
+impl std::hash::Hash for Vec3 {
+    fn hash<H: std::hash::Hasher>(&self, state: &mut H) {
+        self.0.hash(state);
+        self.1.hash(state);
+        self.2.hash(state);
+    }
+}
+
 impl PartialEq for Vec3 {
     fn eq(&self, other: &Vec3) -> bool {
         self.0 == other.0 && self.1 == other.1 && self.2 == other.2
     }
 }
+
+impl Eq for Vec3 {}
 
 impl Vec3 {
     fn from_vec(v: &Vec<i32>) -> Self {
@@ -52,10 +64,13 @@ pub fn solve(input: &str) {
             p.v += p.a;
             p.p += p.v;
         }
+        let mut h = HashMap::new();
+        for p in &data {
+            *h.entry(p.p).or_insert(0) += 1;
+        }
         data = data
-            .iter()
-            .filter(|p| data.iter().filter(|q| p.p == q.p).count() == 1)
-            .map(|p| p.clone())
+            .into_iter()
+            .filter(|p| h[&p.p] == 1)
             .collect::<Vec<_>>();
     }
     println!("{}", data.len());

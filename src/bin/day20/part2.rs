@@ -21,8 +21,8 @@ impl Vec3 {
     }
 }
 
-#[derive(Debug, Clone, Copy)]
-struct P {
+#[derive(Debug, Clone)]
+struct Particule {
     p: Vec3,
     v: Vec3,
     a: Vec3,
@@ -41,7 +41,7 @@ pub fn solve(input: &str) {
                 })
                 .collect::<Vec<_>>()
         })
-        .map(|x| P {
+        .map(|x| Particule {
             p: Vec3::from_vec(&x[0]),
             v: Vec3::from_vec(&x[1]),
             a: Vec3::from_vec(&x[2]),
@@ -55,7 +55,7 @@ pub fn solve(input: &str) {
         data = data
             .iter()
             .filter(|p| data.iter().filter(|q| p.p == q.p).count() == 1)
-            .map(|p| *p)
+            .map(|p| p.clone())
             .collect::<Vec<_>>();
     }
     println!("{}", data.len());

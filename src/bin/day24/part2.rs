@@ -35,5 +35,5 @@ pub fn solve(input: &str) {
         })
         .max()
         .unwrap();
-    println!("{:?}", res);
+    println!("{}", res.1);
 }

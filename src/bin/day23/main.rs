@@ -1,5 +1,5 @@
 mod part1;
-// mod part2;
+mod part2;
 
 use std::io::{self, Read};
 fn main() {
@@ -7,5 +7,5 @@ fn main() {
     io::stdin().read_to_string(&mut input).unwrap();
     let input = input.trim();
     part1::solve(input);
-    // part2::solve(input);
+    part2::solve(input);
 }

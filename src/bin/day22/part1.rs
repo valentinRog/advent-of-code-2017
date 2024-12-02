@@ -1,6 +1,6 @@
 use std::collections::HashSet;
 
-#[derive(Debug, Eq, PartialEq, Clone, Copy)]
+#[derive(Debug, Eq, PartialEq, Clone, Copy, Hash)]
 struct Complex {
     r: i32,
     i: i32,
@@ -23,13 +23,6 @@ impl std::ops::Mul for Complex {
             r: self.r * rhs.r - self.i * rhs.i,
             i: self.r * rhs.i + self.i * rhs.r,
         }
-    }
-}
-
-impl std::hash::Hash for Complex {
-    fn hash<H: std::hash::Hasher>(&self, state: &mut H) {
-        self.r.hash(state);
-        self.i.hash(state);
     }
 }
 

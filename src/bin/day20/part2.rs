@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 struct Vec3(i32, i32, i32);
 
 impl std::ops::AddAssign for Vec3 {
@@ -10,22 +10,6 @@ impl std::ops::AddAssign for Vec3 {
         self.2 += rhs.2;
     }
 }
-
-impl std::hash::Hash for Vec3 {
-    fn hash<H: std::hash::Hasher>(&self, state: &mut H) {
-        self.0.hash(state);
-        self.1.hash(state);
-        self.2.hash(state);
-    }
-}
-
-impl PartialEq for Vec3 {
-    fn eq(&self, other: &Vec3) -> bool {
-        self.0 == other.0 && self.1 == other.1 && self.2 == other.2
-    }
-}
-
-impl Eq for Vec3 {}
 
 impl Vec3 {
     fn from_vec(v: &Vec<i32>) -> Self {

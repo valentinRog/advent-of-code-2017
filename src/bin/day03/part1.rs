@@ -1,4 +1,4 @@
-#[derive(Debug, Eq, PartialEq, Clone, Copy)]
+#[derive(Debug, Eq, PartialEq, Clone, Copy, Hash)]
 struct Complex(i32, i32);
 
 impl std::ops::Add for Complex {
@@ -15,13 +15,6 @@ impl std::ops::Mul for Complex {
             self.0 * rhs.0 - self.1 * rhs.1,
             self.0 * rhs.1 + self.1 * rhs.0,
         )
-    }
-}
-
-impl std::hash::Hash for Complex {
-    fn hash<H: std::hash::Hasher>(&self, state: &mut H) {
-        self.0.hash(state);
-        self.1.hash(state);
     }
 }
 
